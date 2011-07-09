@@ -150,8 +150,7 @@
             state.enabled = true;
             state.initialized = true;
 
-            // Define me.el, just for consistency with me.scrollEl and
-            // me.wrapperEl.
+            // Define me.el, just for consistency with me.scrollEl and me.wrapperEl.
             me.el = me;
 
             // Create the wrapperEl, apply the initial CSS and wrap it around
@@ -185,6 +184,11 @@
             // Define the scrollEl and the wrapperEl attributes.
             me.scrollEl = me.el.parent();
             me.wrapperEl = me.scrollEl.parent();
+
+						//Pack me.* elements into .data for reference later
+						me.data('el', me);
+						me.data('scrollEl', me.el.parent());
+						me.data('wrapperEl', me.scrollEl.parent());
 
             // Set the initial dimensions and the max scroll values.
             refresh();
@@ -223,6 +227,10 @@
 
 
         function refresh(repeatedRefresh) {
+						//Unpack me.* elements
+						me.el = me.data('el');
+						me.scrollEl = me.data('scrollEl');
+						me.wrapperEl = me.data('wrapperEl');
 
             // Re-apply CSS to the wrapperEl if needed to correctly calculate the
             // el's width.
